@@ -1,0 +1,26 @@
+name: Auto Withdraw
+
+on:
+  schedule:
+    - cron: '30 18 * * *' # เวลา 01:30 ไทย (UTC+7)
+  workflow_dispatch: # กดรันเองก็ได้
+
+jobs:
+  withdraw-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run autoWithdraw script
+      run: node autoWithdraw.js
+
